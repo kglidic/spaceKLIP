@@ -17,12 +17,12 @@ body:
       placeholder: Describe the issue or suggest improvments here.
     validations:
       required: true
-  - type: input
-    id: page-url
+  - type: textarea
+    id: page-urls
     attributes:
-      label: URL of the documentation page (if applicable).
+      label: URLs of the documentation pages (if applicable).
       description: |
-        If the issue is specific to a particular page, provide the URL here.
-        This helps us locate and address the issue more efficiently.
-      placeholder: Enter the URL.
+        If the issue is specific to particular pages, provide the URLs here.
+        This helps us locate and address the issue more efficiently. You can list multiple URLs if needed.
+      placeholder: Enter the URLs.
 
