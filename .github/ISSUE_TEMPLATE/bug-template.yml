@@ -38,8 +38,15 @@ body:
       description: |
         Please specify the particular part of the code or area within the spaceKLIP pipeline:
       placeholder: Enter details here
+  - type: textarea
+    id: other-details
+    attributes:
+      label: Additional Details (if selecting 'Other')
+      description: |
+        Please specify the particular part of the code or area within the spaceKLIP pipeline if you selected 'Other'. Otherwise, leave this blank.
+      placeholder: Enter details here
+      validations:
+        required: false
       visibility:
-        conditional:
-          field: area
-          values:
-            - Other
+        expression: area == 'Other'
+
