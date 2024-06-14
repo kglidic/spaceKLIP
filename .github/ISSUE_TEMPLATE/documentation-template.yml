@@ -4,8 +4,8 @@ title: "[Documentation]: "
 labels: ["documentation"]
 assignees: []
 body:
- - type: markdown
-   attributes:
+  - type: markdown
+    attributes:
       value: |
         Thank you for helping us improve our documentation! Please fill out the sections below and after you submit this issue, check this GitHub thread for any updates/responses from the spaceKLIP team.
   - type: checkboxes
