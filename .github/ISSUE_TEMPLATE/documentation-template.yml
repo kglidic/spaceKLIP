@@ -4,6 +4,15 @@ title: "[Documentation]: "
 labels: ["documentation"]
 assignees: []
 body:
+  - type: checkboxes
+    id: verify
+    attributes:
+      label: Check Existing Issues
+      description: |
+        Before submitting this issue, please confirm the following:
+      options:
+        - label: Yes, I have checked existing issues to ensure this problem hasn't already been reported.
+          required: true
   - type: markdown
     attributes:
       value: |
@@ -25,13 +34,11 @@ body:
         If the issue is specific to particular pages, provide the URLs here.
         This helps us locate and address the issue more efficiently. You can list multiple URLs if needed.
       placeholder: Enter the URLs.
-  - type: checkboxes
-    id: verify
+  - type: textarea
+    id: additional-context
     attributes:
-      label: Verification
+      label: Additional context or information
       description: |
-        Before submitting this issue, please verify the following:
-        - You have checked existing issues to ensure this problem hasn't already been reported.
-      options:
-        - label: Yes, I have checked existing issues.
-          required: true
+        Provide any additional context or information that might be relevant to this issue or suggestion.
+      placeholder: Add any additional context or information here.
+
