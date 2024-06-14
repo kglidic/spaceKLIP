@@ -3,10 +3,6 @@ description: File a bug report
 title: "[Bug]: "
 labels: ["bug"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thanks for taking the time to fill out this bug report! After you submit this issue, check this GitHub thread for any updates/responses from the spaceKLIP team.
   - type: checkboxes
     id: verify
     attributes:
@@ -31,22 +27,39 @@ body:
         - Other
     validations:
       required: true
-  - type: input
-    id: other-details
-    attributes:
-      label: Specify other area
-      description: |
-        Please specify the particular part of the code or area within the spaceKLIP pipeline:
-      placeholder: Enter details here
   - type: textarea
-    id: other-details
+    id: description
     attributes:
-      label: Additional Details (if selecting 'Other')
-      description: |
-        Please specify the particular part of the code or area within the spaceKLIP pipeline if you selected 'Other'. Otherwise, leave this blank.
-      placeholder: Enter details here
-      validations:
-        required: false
-      visibility:
-        expression: area == 'Other'
-
+      label: Description
+      description: Please describe what happened and/or what you expected to happen.
+      placeholder: Describe the issue and/or expected outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error traceback output
+      description: Please copy and paste the full traceback of the error you encountered.
+      placeholder: Paste the error traceback here.
+    validations:
+      required: true
+  - type: input
+    id: OS
+    attributes:
+      label: What operating system are you using?
+      placeholder: E.g., Windows 11; Mac OS 10.10 El Capitan
+  - type: input
+    id: python_version
+    attributes:
+      label: What version of Python are you running?
+      description: If you're not sure, open a terminal with the environment you're running spaceKLIP in and type "python --version"
+      placeholder: E.g., Python 3.7
+  - type: textarea
+    id: package_list
+    attributes:
+      label: What Python packages do you have installed?
+      description: To get a full list, open a terminal with the environment you're running spaceKLIP in and type "conda list". Paste the full output here.
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! After you submit this issue, check this GitHub thread for any updates/responses from the spaceKLIP team.
