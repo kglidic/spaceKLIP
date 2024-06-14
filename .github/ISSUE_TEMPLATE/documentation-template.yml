@@ -2,7 +2,7 @@ name: Documentation Issue or Request
 about: Report issues or suggest improvements to the spaceKLIP documentation.
 title: "[Documentation]: "
 labels: ["documentation"]
-assignees: ""
+assignees: " "
 body:
   - type: markdown
     attributes:
