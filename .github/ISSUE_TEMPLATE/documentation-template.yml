@@ -1,3 +1,20 @@
----
-name: documentation
----
+name: Documentation Issue or Request
+about: Report issues or suggest improvements to the spaceKLIP documentation.
+title: "[Documentation]: "
+labels: ["documentation"]
+assignees: ''
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping us improve our documentation! Please fill out the sections below and after you submit this issue, check this GitHub thread for any updates/responses from the spaceKLIP team.
+  - type: textarea
+  id: problem-description
+    attributes:
+      label: Describe the issue or suggest an improvement
+      description: |
+        Please describe any issues with our documentation or suggest improvements. Your feedback is appreciated!
+      placeholder: Describe the issue or suggest improvments here.
+    validations:
+      required: true
+
