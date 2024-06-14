@@ -20,9 +20,18 @@ body:
   - type: textarea
     id: page-urls
     attributes:
-      label: URLs of the documentation pages (if applicable).
+      label: URLs of the documentation pages (if applicable)
       description: |
         If the issue is specific to particular pages, provide the URLs here.
         This helps us locate and address the issue more efficiently. You can list multiple URLs if needed.
       placeholder: Enter the URLs.
-
+  - type: checkboxes
+    id: verify
+    attributes:
+      label: Verification
+      description: |
+        Before submitting this issue, please verify the following:
+        - You have checked existing issues to ensure this problem hasn't already been reported.
+      options:
+        - label: Yes, I have checked existing issues.
+          required: true
