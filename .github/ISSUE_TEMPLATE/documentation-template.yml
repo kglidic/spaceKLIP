@@ -9,7 +9,7 @@ body:
       value: |
         Thank you for helping us improve our documentation! Please fill out the sections below and after you submit this issue, check this GitHub thread for any updates/responses from the spaceKLIP team.
   - type: textarea
-  id: problem-description
+    id: problem-description
     attributes:
       label: Describe the issue or suggest an improvement
       description: |
