@@ -17,13 +17,13 @@ body:
       options:
         - label: Yes, I have checked existing issues to ensure this problem hasn't already been reported.
           required: true
-   - type: textarea
+  - type: textarea
     id: problem-description
     attributes:
       label: Describe the issue or suggest an improvement
       description: |
         Please describe any issues with our documentation or suggest improvements. Your feedback is appreciated!
-      placeholder: Describe the issue or suggest improvments here.
+      placeholder: Describe the issue or suggest improvements here.
     validations:
       required: true
   - type: textarea
