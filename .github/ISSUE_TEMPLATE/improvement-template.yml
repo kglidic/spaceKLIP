@@ -1,0 +1,53 @@
+name: Enhancement Suggestion
+description: Suggest an enhancement to spaceKLIP
+title: "[Enhancement]: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: instrument
+    attributes:
+      label: Instrument or Category
+      description: Which instrument or piece of code would you like to see improved?
+      multiple: true
+      options:
+        - NIRCam Stage 1/2 Pipeline
+        - MIRI Stage 1/2 Pipeline
+        - Image Tools
+        - PSF Subtraction
+        - Analysis Tools
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What is your suggestion?
+      description: What feature would you like to see in spaceKLIP?
+      placeholder: It would be super helpful if spaceKLIP did...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error traceback output
+      description: If relevant, please copy and paste the full traceback of any errors you encountered.
+  - type: input
+    id: OS
+    attributes:
+      label: What operating system are you using?
+      placeholder: E.g., Windows 11; Mac OS 10.10 El Capitan
+  - type: input
+    id: python_version
+    attributes:
+      label: What version of Python are you running?
+      description: If you're not sure, open a terminal with the environment you're running spaceKLIP in and type "python --version"
+      placeholder: E.g., Python 3.7
+  - type: textarea
+    id: package_list
+    attributes:
+      label: What Python packages do you have installed?
+      description: To get a full list, open a terminal with the environment you're running spaceKLIP in and type "conda list". Paste the full output here.
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest an enhancement! After you submit this issue, check this GitHub thread for any updates/responses from the spaceKLIP team.
