@@ -42,7 +42,7 @@ body:
       description: Please copy and paste the full traceback of the error you encountered.
       placeholder: Paste the error traceback here.
     validations:
-      required: true
+      required: false
   - type: input
     id: OS
     attributes:
@@ -59,6 +59,13 @@ body:
     attributes:
       label: What Python packages do you have installed?
       description: To get a full list, open a terminal with the environment you're running spaceKLIP in and type "conda list". Paste the full output here.
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context or information
+      description: |
+        Provide any additional context or information that might be relevant to this issue.
+      placeholder: Add any additional context or information here.
   - type: markdown
     attributes:
       value: |
