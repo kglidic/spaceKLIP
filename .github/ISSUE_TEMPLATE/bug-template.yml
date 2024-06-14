@@ -1,0 +1,43 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! After you submit this issue, check this GitHub thread for any updates/responses from the spaceKLIP team.
+  - type: checkboxes
+    id: verify
+    attributes:
+      label: Check Existing Issues
+      description: |
+        Before submitting this issue, please confirm the following:
+      options:
+        - label: Yes, I have checked existing issues to ensure this problem hasn't already been reported.
+          required: true
+  - type: dropdown
+    id: instrument
+    attributes:
+      label: Instrument or Category
+      description: Which instrument or piece of code were you running?
+      multiple: true
+      options:
+        - NIRCam Stage 1/2 Pipeline
+        - MIRI Stage 1/2 Pipeline
+        - Image Tools
+        - PSF Subtraction
+        - Analysis Tools
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: other-details
+    attributes:
+      label: Specify other area
+      description: |
+        Please specify the particular part of the code or area within the spaceKLIP pipeline:
+      placeholder: Enter details here
+    conditional:
+      id: area
+      value: Other
