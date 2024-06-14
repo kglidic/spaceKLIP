@@ -38,6 +38,8 @@ body:
       description: |
         Please specify the particular part of the code or area within the spaceKLIP pipeline:
       placeholder: Enter details here
-    conditional:
-      id: area
-      value: Other
+      visibility:
+        conditional:
+          field: area
+          values:
+            - Other
