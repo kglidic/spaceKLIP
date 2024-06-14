@@ -4,6 +4,10 @@ title: "[Documentation]: "
 labels: ["documentation"]
 assignees: []
 body:
+ - type: markdown
+    attributes:
+      value: |
+        Thank you for helping us improve our documentation! Please fill out the sections below and after you submit this issue, check this GitHub thread for any updates/responses from the spaceKLIP team.
   - type: checkboxes
     id: verify
     attributes:
@@ -13,11 +17,7 @@ body:
       options:
         - label: Yes, I have checked existing issues to ensure this problem hasn't already been reported.
           required: true
-  - type: markdown
-    attributes:
-      value: |
-        Thank you for helping us improve our documentation! Please fill out the sections below and after you submit this issue, check this GitHub thread for any updates/responses from the spaceKLIP team.
-  - type: textarea
+   - type: textarea
     id: problem-description
     attributes:
       label: Describe the issue or suggest an improvement
