@@ -495,7 +495,7 @@ class ImageTools():
             or 'simple'  for a simple np.nanmedian
         sigma : float
             number of standard deviations to use for the clipping limit in sigma_clipped_stats, if
-            the robust option is selected.
+            the robust, sigma_clipped, or border option is selected.
         borderwidth : int
             number of pixels to use when defining the outer border region, if the border option is selected.
             Default is to use the outermost 32 pixels around all sides of the image.
@@ -527,6 +527,9 @@ class ImageTools():
                 
                 # Skip file types that are not in the list of types.
                 if self.database.obs[key]['TYPE'][j] in types:
+
+                    # Shape of the data.
+                    shape = data.shape
                     
                     # Subtract median.
                     head, tail = os.path.split(fitsfile)
@@ -546,30 +549,29 @@ class ImageTools():
                         bg_median = np.nanmedian(data_temp, axis=(1, 2), keepdims=True)
                     elif method == 'sigma_clipped':
                         # Robust median using astropy.stats.sigma_clipped_stats
-                        if len(data.shape) == 2:
-                            mean, median, stddev = astropy.stats.sigma_clipped_stats(data_temp,sigma=sigma)
-                        elif len(data.shape) == 3:
-                            bg_median = np.zeros([data.shape[0], 1, 1])
-                            for iint in range(data.shape[0]):
-                                mean_i, median_i, stddev_i = astropy.stats.sigma_clipped_stats(data[iint])
+                        if len(shape) == 2:
+                            mean, bg_median, stddev = astropy.stats.sigma_clipped_stats(data_temp, sigma=sigma)
+                        elif len(shape) == 3:
+                            bg_median = np.zeros([shape[0], 1, 1])
+                            for iint in range(shape[0]):
+                                mean_i, median_i, stddev_i = astropy.stats.sigma_clipped_stats(data[iint], sigma=sigma)
                                 bg_median[iint] = median_i
                         else:
                             raise NotImplementedError("data must be 2d or 3d for this method")
                     elif method=='border':
                         # Use only the outer border region of the image, near the edges of the FOV
-                        shape = data.shape
                         if len(shape) == 2:
                             # only one int
                             y, x = np.indices(shape)
                             bordermask = (x < borderwidth) | (x > shape[1] - borderwidth) | (y < borderwidth) | ( y > shape[0] - borderwidth)
-                            mean, bg_median, stddev = astropy.stats.sigma_clipped_stats(data[bordermask])
+                            mean, bg_median, stddev = astropy.stats.sigma_clipped_stats(data[bordermask], sigma=sigma)
                         elif len(shape) == 3:
                             # perform robust stats on border region of each int
-                            y, x = np.indices(data.shape[1:])
+                            y, x = np.indices(shape[1:])
                             bordermask = (x < borderwidth) | (x > shape[1] - borderwidth) | (y < borderwidth) | ( y > shape[0] - borderwidth)
-                            bg_median = np.zeros([shape[0],1,1])
+                            bg_median = np.zeros([shape[0], 1, 1])
                             for iint in range(shape[0]):
-                                mean_i, median_i, stddev_i = astropy.stats.sigma_clipped_stats(data[iint][bordermask])
+                                mean_i, median_i, stddev_i = astropy.stats.sigma_clipped_stats(data[iint][bordermask], sigma=sigma)
                                 bg_median[iint] = median_i
                         else:
                             raise NotImplementedError("data must be 2d or 3d for this method")
