@@ -1,6 +1,7 @@
 name: Documentation Issue or Request
 description: Report issues or suggest improvements to the spaceKLIP documentation.
 title: "[Documentation]: "
+labels: ["documentation"]
 body:
   - type: checkboxes
     id: verify
