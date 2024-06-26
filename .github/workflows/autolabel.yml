@@ -1,0 +1,14 @@
+name: "Set Issue Label and Assignee"
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Naturalclar/issue-action@v2.0.2
+        with:
+          title-or-body: "both"
+          parameters: '[ {"keywords": ["nircam","NIRCAM","NIRCam"], "labels": ["NIRCam"], "assignees": ["kglidic"]}, {"keywords": ["MIRI","miri"], "labels": ["MIRI"], "assignees": ["kglidic"]}, {"keywords": ["Image Tools"], "labels": ["Image Tools"], "assignees": ["kglidic"]}, {"keywords": ["PSF Subtraction"], "labels": ["PSF Subtraction"], "assignees": ["kglidic"]}, {"keywords": ["Analysis Tools"], "labels": ["Analysis Tools"], "assignees": ["kglidic"]}, {"keywords": ["Other"], "labels": [], "assignees": ["kglidic"]}, {"keywords": ["Documentation"], "labels": ["documentation"], "assignees": ["kglidic"]}]'
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
