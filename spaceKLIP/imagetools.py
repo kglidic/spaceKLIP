@@ -472,7 +472,7 @@ class ImageTools():
     def subtract_median(self,
                         types=['SCI', 'SCI_TA', 'SCI_BG', 'REF', 'REF_TA', 'REF_BG'],
                         method='border',
-                        sigma=3.0,
+                        sigma=5.0,
                         borderwidth=32,
                         subdir='medsub'):
         
@@ -494,16 +494,15 @@ class ImageTools():
             'border' for robust median on the outer border region only, to ignore the bright stellar PSF in the center,
             or 'simple'  for a simple np.nanmedian
         sigma : float
-            number of standard deviations to use for the clipping limit in sigma_clipped_stats, if
-            the robust option is selected.
+            Number of standard deviations to use for the clipping limit in sigma_clipped_stats.
         borderwidth : int
-            number of pixels to use when defining the outer border region, if the border option is selected.
+            Number of pixels to use when defining the outer border region, if the border option is selected.
             Default is to use the outermost 32 pixels around all sides of the image.
 
         Returns
         -------
         None, but writes out new files to subdir and updates database.
-         """
+        """
         
         # Set output directory.
         output_dir = os.path.join(self.database.output_dir, subdir)
@@ -541,17 +540,17 @@ class ImageTools():
                         # Robust median, using a method by Jens
                         bg_med = np.nanmedian(data_temp, axis=(1, 2), keepdims=True)
                         bg_std = robust.medabsdev(data_temp, axis=(1, 2), keepdims=True)
-                        bg_ind = data_temp > (bg_med + 5. * bg_std)  # clip bright PSFs for final calculation
+                        bg_ind = data_temp > (bg_med + sigma * bg_std)  # clip bright PSFs for final calculation
                         data_temp[bg_ind] = np.nan
                         bg_median = np.nanmedian(data_temp, axis=(1, 2), keepdims=True)
                     elif method == 'sigma_clipped':
                         # Robust median using astropy.stats.sigma_clipped_stats
                         if len(data.shape) == 2:
-                            mean, median, stddev = astropy.stats.sigma_clipped_stats(data_temp,sigma=sigma)
+                            mean, bg_median, stddev = astropy.stats.sigma_clipped_stats(data_temp, sigma=sigma)
                         elif len(data.shape) == 3:
                             bg_median = np.zeros([data.shape[0], 1, 1])
                             for iint in range(data.shape[0]):
-                                mean_i, median_i, stddev_i = astropy.stats.sigma_clipped_stats(data[iint])
+                                mean_i, median_i, stddev_i = astropy.stats.sigma_clipped_stats(data[iint], sigma=sigma)
                                 bg_median[iint] = median_i
                         else:
                             raise NotImplementedError("data must be 2d or 3d for this method")
@@ -562,14 +561,14 @@ class ImageTools():
                             # only one int
                             y, x = np.indices(shape)
                             bordermask = (x < borderwidth) | (x > shape[1] - borderwidth) | (y < borderwidth) | ( y > shape[0] - borderwidth)
-                            mean, bg_median, stddev = astropy.stats.sigma_clipped_stats(data[bordermask])
+                            mean, bg_median, stddev = astropy.stats.sigma_clipped_stats(data[bordermask], sigma=sigma)
                         elif len(shape) == 3:
                             # perform robust stats on border region of each int
                             y, x = np.indices(data.shape[1:])
                             bordermask = (x < borderwidth) | (x > shape[1] - borderwidth) | (y < borderwidth) | ( y > shape[0] - borderwidth)
                             bg_median = np.zeros([shape[0],1,1])
                             for iint in range(shape[0]):
-                                mean_i, median_i, stddev_i = astropy.stats.sigma_clipped_stats(data[iint][bordermask])
+                                mean_i, median_i, stddev_i = astropy.stats.sigma_clipped_stats(data[iint][bordermask], sigma=sigma)
                                 bg_median[iint] = median_i
                         else:
                             raise NotImplementedError("data must be 2d or 3d for this method")
